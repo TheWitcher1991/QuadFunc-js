@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Func-JS</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="./style/index.css">
+
+</head>
+<body>
+
+    <main id="wrapper">
+        <header id="header">
+            <nav class="nav">
+                <div class="none"></div>
+                <div class="block">
+                    <ul class="menu__ul">
+                        <li id="minimize-button"><i class="far fa-window-minimize"></i></li>
+                        <li id="close-button"><i class="fas fa-times"></i></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <article id="article">
+            <div class="function__wrapper">
+                <div class="input__function">
+                    <div>
+                        <input id="fun1" type="number" name="fun1">
+                        <input style="padding:0;width:28px;" id="x1" type="text" name="x1" value="Х^2" readonly>
+                        <input id="fun2" type="number" name="fun2">
+                        <input style="padding:0;width:11px;" id="x2" type="text" name="x2" value="Х" readonly>
+                        <input id="fun3" type="number" name="fun3">
+                    </div>
+                    <button type="button" id="run__function">Решение</button>
+                </div>
+                <div class="exp">
+                    Пример: 1x^2 + 3x + 2!!!!!!
+                </div>
+            </div>
+
+            <div class="decision__wrapper">
+
+            </div>
+   
+           <div class="properties__wrapper">
+
+           </div>
+
+            
+        </article>
+    </main>
+
+    <script src="../electron/renderer.js"></script>
+    <script src="./script/index.js"></script>
+</body>
+</html>
