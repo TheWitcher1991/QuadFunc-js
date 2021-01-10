@@ -18,7 +18,11 @@
             b = parseInt(b);
             c = parseInt(c);
 
-            answer(a, b, c);
+            if (!a || !b || !c) {
+                error();
+            } else {
+                answer(a, b, c);
+            }
 
         });
 
@@ -78,12 +82,22 @@
 
             strD = `D = (${b})^2 - 4 * ${a} * ${c} = ${D}`;
 
+            let X0 = -(b / (2 * a));
+
+            let Y0 = a * Math.pow(X0, 2) + b * X0 + c;
+
+            document.querySelector('.decision > ul').innerHTML += `
+                <li class="disk">
+                    <span class="title" style="margin: 9px 0 0 0;">Вершина:</span>
+                    <span class="exp1">(${X0}; ${Y0})</span>
+                </li>
+            `;
 
             let blockP = document.querySelector('.properties__wrapper');
             blockP.innerHTML = `<div class="properties">
                 <div class="graph">
                     <span class="title">График:</span>
-                    <canvas width=300 height=300></canvas>
+                    <canvas width=350 height=350></canvas>
                 </div>
                 <div class="properties__more">
                     <ul>
@@ -126,7 +140,7 @@
             }
 
             // Точки пересечения Y
-            Y1 = a * Math.pow(0, 2) + b * 0 + c
+            let Y1 = a * Math.pow(0, 2) + b * 0 + c
 
             document.querySelector('.properties__more > ul').innerHTML += `
                 <li class="perechY">
@@ -135,24 +149,62 @@
                 </li>
             `;
 
+            // Монотонность
+            if (a > 0) {
+                document.querySelector('.properties__more > ul').innerHTML += `
+                    <li class="perechY">
+                        <span class="title" style="margin: 9px 0 0 0;">Монотонность:</span>
+                        <span class="exp1">Функция убывает на (-<span style="font-size:25px">&#8734</span>; ${X0}]; возрастает на [${X0}; +<span style="font-size:25px">&#8734</span>);</span>
+                    </li>
+                `;
+            } else if (a < 0) {
+                document.querySelector('.properties__more > ul').innerHTML += `
+                    <li class="perechY">
+                        <span class="title" style="margin: 9px 0 0 0;">Монотонность:</span>
+                        <span class="exp1">Функция возрастает на (-<span style="font-size:25px">&#8734</span>; ${X0}]; убывает на [${X0}; +<span style="font-size:25px">&#8734</span>);</span>
+                    </li>
+                `;
+            }
+
+            // Унаиб Yнаим
+            if (a > 0) {
+                document.querySelector('.properties__more > ul').innerHTML += `
+                    <li class="perechY">
+                        <span class="title" style="margin: 9px 0 0 0;">Значения функции:</span>
+                        <span class="exp1">Yнаиб - нет; Yнаим = ${X0}</span>
+                    </li>
+                `;
+            } else if (a < 0) {
+                document.querySelector('.properties__more > ul').innerHTML += `
+                    <li class="perechY">
+                        <span class="title" style="margin: 9px 0 0 0;">Значения функции:</span>
+                        <span class="exp1">Yнаиб = ${X0}; Yнаим - нет</span>
+                    </li>
+                `;
+            }
+
             // График
             graph(a, b, c);
 
         };
 
         const error = () => {
-            return;
+            document.querySelector('.decision__wrapper').innerHTML = `
+                <div style="background: hsl(223deg 16% 18%);
+                border-radius: 6px;
+                padding: 12px;margin: 10px 0 0 0; font-size: 20px">Введите данные</div>
+            `;
         };
 
         const graph = (a, b, c) => {
-            let y     = x => Math.pow(x, 2) + b * x + c,
+            let y     = x => a * Math.pow(x, 2) + b * x + c,
                 //let fdas = `${a * Math.pow(x, 2)} ${b * x} ${c}` ;  Math.pow(x, 2) + 3 * x - 2;
                 scale = 25,
                 step  = 1,
                 cnvs  = document.querySelector('canvas'),
                 ctx   = cnvs.getContext('2d');
             
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.5; 
             
             for (let i = step * scale; i < cnvs.width; i += step * scale) { //вертикальные
                 wrap('#888d9d', [[i, 0], [i, cnvs.height]]);
@@ -175,7 +227,7 @@
             wrap('red', [[0, cnvs.height / 2], [cnvs.width, cnvs.height / 2]]);
             
             // ось Y
-            wrap('green', [[cnvs.width / 2, 0], [cnvs.width / 2, cnvs.height]]);
+            wrap('red', [[cnvs.width / 2, 0], [cnvs.width / 2, cnvs.height]]);
             
             
         };

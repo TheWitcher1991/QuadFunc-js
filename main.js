@@ -23,11 +23,11 @@ function initialize () {
 
     function createWindow () {
         const windowOptions = {
-            width: 938,
-            height: 750,
+            width: 1056,
+            height: 900,
             center: true,
             resizable: false,
-            title: 'Func-JS',
+            title: 'QuadFunc-js',
             // transparent: true,
             frame: false,
             hasShadow: false,

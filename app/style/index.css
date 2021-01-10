@@ -118,6 +118,7 @@ body {
 
 .input__function > div {
     display: flex;
+    width: 100%;
 }
 
 .input__function input {
@@ -281,6 +282,7 @@ body {
     padding: 9px;
     border-radius: 3px;
     color: #9fa3b1;
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 3px 0 0 0;
 }
